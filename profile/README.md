@@ -24,8 +24,8 @@
 - [ ] 矢が頭に当たると対象に盲目が付与される。
 
 ## キャラコン
-- [ ] Wall Bounce
-- [ ] Climb Dash
+- [x] Wall Bounce
+- [x] Climb Dash
 - [ ] Air Strafe
 - [ ] Air Curve
 
@@ -47,6 +47,6 @@
   - 初動で2つ所持
 
 ## 特殊装置
-- [ ] ジャンプ板
-- [ ] ダッシュ板
+- [x] ジャンプ板
+- [x] ダッシュ板
 - [ ] ロープ
