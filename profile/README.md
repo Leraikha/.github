@@ -18,7 +18,7 @@
 5. ゲームスタート
 6. 残り二人になったらタイマンのため中央へテレポート
 
-### ゲーム内の特殊状況
+## ゲーム内の特殊状況
 - [ ] ネザライトのプロテクター（鎧）は矢を受けると鉄のプロテクター（鎧）に変化する。
 - [ ] 鉄のプロテクター（鎧）は矢を受けると鎖のプロテクター（鎧）に変化する。
 - [ ] 鎖のプロテクター（鎧）は矢を受けると破壊される。
@@ -26,17 +26,10 @@
 
 ## キャラコン
 - [x] Wall Bounce
-- [x] Climb Dash
-- [x] Air Strafe
-
-## データベース
-#### Account
-|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
-|---|---|---|---|---|---|---|---|---|---|
-|ID|id|INTEGER UNSIGNED|〇||||〇|||
-|UUID|uuid|CHAR(32)|||〇|〇||||
-|プレイ時間|play_times|DATETIME|||〇|||||
-|作成日|created_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
+- [x] Climb DasH
+- [x] Chain Lift
+- [x] Jump Block
+- [x] Dash Block
 
 ## アビリティ
 - [ ] リニアーピーク（直線高速突撃）
@@ -55,6 +48,11 @@
   - プロテクター（鎧）を一段階上位の物へ回復させる
   - 初動で2つ所持
 
-## 特殊装置
-- [x] ジャンプ板
-- [x] ダッシュ板
+## データベース
+#### Account
+|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
+|---|---|---|---|---|---|---|---|---|---|
+|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|UUID|uuid|CHAR(32)|||〇|〇||||
+|プレイ時間|play_times|DATETIME|||〇|||||
+|作成日|created_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
