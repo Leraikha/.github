@@ -28,8 +28,6 @@
 - [x] Wall Bounce
 - [x] Climb Dash
 - [x] Chain Lift
-- [x] Jump Block
-- [x] Dash Block
 
 ## アビリティ
 - [ ] リニアーピーク（直線高速突撃）
