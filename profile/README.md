@@ -26,7 +26,7 @@
 
 ## キャラコン
 - [x] Wall Bounce
-- [x] Climb DasH
+- [x] Climb Dash
 - [x] Chain Lift
 - [x] Jump Block
 - [x] Dash Block
@@ -56,3 +56,5 @@
 |UUID|uuid|CHAR(32)|||〇|〇||||
 |プレイ時間|play_times|DATETIME|||〇|||||
 |作成日|created_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
+
+...
