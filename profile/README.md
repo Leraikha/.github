@@ -37,10 +37,11 @@
 ## アビリティ
 - [x] リニアーピーク（直線高速突撃）
   - [x] パーティクルを発生させる
-  - [x] 視点方向へ高速移動
+  - [x] 視点方向への高速移動
   - [x] クールタイム30秒
 - [x] シャドウステップ（影化移動）
-  - [x] 無敵透明になり、影のパーティクルを伴いながら移動できるようになる。
+  - [x] パーティクルを発生させながら動く。
+  - [x] 無敵透明になる。
   - [x] 移動速度が上昇する。
   - [x] 効果継続時間8秒
   - [x] クールタイム90秒
@@ -54,6 +55,9 @@
   - [ ] 初動で2つ所持
 
 ## オリジナルイベント
+これらのイベントは内部の処理を行った後にイベントとして発火させ、外側のサウンドやパーティクルといった装飾のコードをそれぞれのイベントで実装するためのもの。  
+[ProtectorEventAdapterListener](https://github.com/Leraikha/Core/blob/master/src/main/kotlin/mc/leraikha/core/listener/ProtectorEventAdapterListener.kt)は内部の処理。  
+[ProtectorEventListener](https://github.com/Leraikha/Core/blob/master/src/main/kotlin/mc/leraikha/core/listener/ProtectorEventListener.kt)は外側の処理。  
 - [x] ProtectorEvent
   - [x] ProtectorBreakEvent
   - [x] ProtectorEnchantedEvent
