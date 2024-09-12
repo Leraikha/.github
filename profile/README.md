@@ -114,6 +114,7 @@
 |ID|id|INT UNSIGNED|〇||-|-|〇|||
 |UUID|uuid|CHAR(32)|||〇|〇||||
 |Discord|discord|VARCHAR(32)||||||NULL||
+|お金|karma|INT UNSIGNED||||||0||
 |タグマーク|tag_prefix|VARCHAR(32)||||||NULL|[VIP]みたいな|
 |プレイ時間|play_times|DATETIME|||〇|||||
 |最終プレイ日|last_login|DATETIME|||〇|||CURRENT_TIMESTAMP||
