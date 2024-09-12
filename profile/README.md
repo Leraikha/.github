@@ -84,12 +84,51 @@
   - [x] GameEntryEndEvent
 
 ## データベース
-#### player
+### マスタ
+#### rank
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
-|---|---|---|---|---|---|---|---|---|---|
-|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+|ID|id|INT UNSIGNED|〇||-|-|〇|||
+|名前|name|CHAR(16)||||||||
+|下限レート|lower_rate|INT UNSIGNED|||〇|||||
+
+### トランザクション
+
+#### player_account
+|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
+|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+|ID|id|INT UNSIGNED|〇||-|-|〇|||
 |UUID|uuid|CHAR(32)|||〇|〇||||
+|Discord|discord|VARCHAR(32)||||||NULL||
+|タグマーク|tag_prefix|VARCHAR(32)||||||NULL|[VIP]みたいな|
 |プレイ時間|play_times|DATETIME|||〇|||||
+|最終プレイ日|last_login|DATETIME|||〇|||CURRENT_TIMESTAMP||
 |作成日|created_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
+
+#### player_battle_record
+|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
+|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+|ID|id|INT UNSIGNED|〇||-|-|〇|||
+|レート|rate|INT UNSIGNED||||||1500||
+|プレイ数|play_count|INT UNSIGNED||||||0||
+|キル数|kill_count|INT UNSIGNED||||||0||
+|デス数|death_count|INT UNSIGNED||||||0||
+|ヘッドショット数|head_shot_count|INT UNSIGNED||||||0||
+|プロテクター破壊回数|break_count|INT UNSIGNED||||||0||
+|プロテクター回復回数|recovery_count|INT UNSIGNED||||||0||
+|プロテクター強化回数|enchanted_count|INT UNSIGNED||||||0||
+|最長射撃距離|longest_shot_distance|DOUBLE||||||0.0||
+
+#### player_ability_validation
+|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
+|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+|ID|id|INT UNSIGNED|〇||-|-|〇|||
+|アビリティ|ability_name|BOOL||||〇||FALSE||
+
+#### player_ability_pick
+|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
+|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+|ID|id|INT UNSIGNED|〇||-|-|〇|||
+|アビリティ|ability_name|INT UNSIGNED||||〇||0||
 
 ...
