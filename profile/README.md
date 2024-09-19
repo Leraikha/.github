@@ -68,8 +68,8 @@
 - [ ] 最終攻撃者が死ぬと、その人の最終攻撃者のフラグが外れる
 - [ ] 最終攻撃者のフラグは時間経過で消えない
 - [ ] 撃破されると所持してたハチミツ入り瓶のみドロップ。
-- [ ] 安地外ダメージはプロテクターを削る
-- [ ] 肉体に一発喰らうと消滅する（消滅原因: 壊疽）
+- [x] 安地外ダメージはプロテクターを削る
+- [x] 肉体に一発喰らうと消滅する（消滅原因: 壊疽）
 
 
 ## キャラコン
@@ -119,22 +119,6 @@
   - [ ] 初動で2つ
 - [ ] 鉄のプロテクター（鎧）
   - [ ] 初動で2つ
-
-
-## オリジナルイベント
-これらのイベントは内部の処理を行った後にイベントとして発火させ、外側のサウンドやパーティクルといった装飾のコードをそれぞれのイベントで実装するためのもの。  
-[ProtectorEventAdapterListener](https://github.com/Leraikha/Core/blob/master/src/main/kotlin/mc/leraikha/core/listener/ProtectorEventAdapterListener.kt)は内部の処理。  
-[ProtectorEventListener](https://github.com/Leraikha/Core/blob/master/src/main/kotlin/mc/leraikha/core/listener/ProtectorEventListener.kt)は外側の処理。  
-- [x] ProtectorEvent
-  - [x] ProtectorBreakEvent
-  - [x] ProtectorEnchantedEvent
-  - [x] ProtectorSetEvent
-  - [x] ProtectorRecoveryEvent
-- [x] GameEvent
-  - [x] GameStartEvent
-  - [x] GameEndEvent
-  - [x] GameEntryStartEvent
-  - [x] GameEntryEndEvent
 
 
 ## データベース
