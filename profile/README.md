@@ -128,12 +128,7 @@
 |TWO|2000|2999|
 |THREE|3000|3999|
 |FOUR|4000|4999|
-|FIVE|5000|5999|
-|SIX|6000|6999|
-|SEVEN|7000|7999|
-|EIGHT|8000|8999|
-|NINE|9000|9999|
-|TEN|10000|-|
+|FIVE|5000|-|
 ※イロレーティングシステムで実装予定
 
 ## データベース
@@ -146,23 +141,28 @@
 |お金|karma|INT UNSIGNED||||||0||
 |タグマーク|tag_prefix|VARCHAR(32)||||||NULL|[VIP]みたいな|
 |プレイ時間|play_times|DATETIME|||〇|||||
-|最終プレイ日|last_login|DATETIME|||〇|||CURRENT_TIMESTAMP||
+|最終プレイ日時|last_play_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
 |作成日|created_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
 
 #### player_battle_record
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
 |ID|id|INT UNSIGNED|〇||-|-|〇|||
-|レート|rate|INT UNSIGNED||||||0||
-|ランク|rank|VARCHAR(8)||||||zero||
-|プレイ数|play_count|INT UNSIGNED||||||0||
-|キル数|kill_count|INT UNSIGNED||||||0||
-|デス数|death_count|INT UNSIGNED||||||0||
-|ヘッドショット数|head_shot_count|INT UNSIGNED||||||0||
-|プロテクター破壊回数|break_count|INT UNSIGNED||||||0||
-|プロテクター回復回数|recovery_count|INT UNSIGNED||||||0||
-|プロテクター強化回数|enchanted_count|INT UNSIGNED||||||0||
-|最長射撃距離|longest_shot_distance|DOUBLE||||||0.0||
+|プレイヤーID|player_id|INTEGER UNSIGNED||player_account.id|〇|||||
+|シーズン|season_id|INTEGER UNSIGNED||season.id|〇|||||
+|ランク|rank_id|INTEGER UNSIGNED||game_rank.id|〇|||||
+|レート|rating|INTEGER UNSIGNED|||〇|||0||
+|プレイ数|play_count|INTEGER UNSIGNED|||〇|||0||
+|勝利数|win_count|INTEGER UNSIGNED|||〇|||0||
+|キル数|kill_count|INTEGER UNSIGNED|||〇|||0||
+|デス数|death_count|INTEGER UNSIGNED|||〇|||0||
+|ヒット数|hit_count|INTEGER UNSIGNED|||〇|||0||
+|ショット数|shot_count|INTEGER UNSIGNED|||〇|||0||
+|ヘッドショット数|headshot_count|INTEGER UNSIGNED|||〇|||0||
+|プロテクター破壊回数|break_count|INTEGER UNSIGNED|||〇|||0||
+|プロテクター回復回数|recovery_count|INTEGER UNSIGNED|||〇|||0||
+|プロテクター強化回数|enchanted_count|INTEGER UNSIGNED|||〇|||0||
+|最長射撃距離|longest_shot_distance|DOUBLE|||〇|||0.0||
 
 #### player_current_settings
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
