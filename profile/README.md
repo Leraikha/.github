@@ -120,18 +120,23 @@
 - [ ] 鉄のプロテクター（鎧）
   - [ ] 初動で2つ
 
+## ランク
+|名称|下限レート|上限レート|
+|---|:---:|:---:|
+|ZERO|0|999|
+|ONE|1000|1999|
+|TWO|2000|2999|
+|THREE|3000|3999|
+|FOUR|4000|4999|
+|FIVE|5000|5999|
+|SIX|6000|6999|
+|SEVEN|7000|7999|
+|EIGHT|8000|8999|
+|NINE|9000|9999|
+|TEN|10000|-|
+※イロレーティングシステムで実装予定
 
 ## データベース
-### マスタ
-#### rank
-|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
-|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-|ID|id|INT UNSIGNED|〇||-|-|〇|||
-|名前|name|CHAR(16)||||||||
-|下限レート|lower_rate|INT UNSIGNED|||〇|||||
-
-### トランザクション
-
 #### player_account
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
@@ -148,7 +153,8 @@
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
 |ID|id|INT UNSIGNED|〇||-|-|〇|||
-|レート|rate|INT UNSIGNED||||||1500||
+|レート|rate|INT UNSIGNED||||||0||
+|ランク|rank|VARCHAR(8)||||||zero||
 |プレイ数|play_count|INT UNSIGNED||||||0||
 |キル数|kill_count|INT UNSIGNED||||||0||
 |デス数|death_count|INT UNSIGNED||||||0||
@@ -157,6 +163,21 @@
 |プロテクター回復回数|recovery_count|INT UNSIGNED||||||0||
 |プロテクター強化回数|enchanted_count|INT UNSIGNED||||||0||
 |最長射撃距離|longest_shot_distance|DOUBLE||||||0.0||
+
+#### player_current_settings
+|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
+|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+|ID|id|INT UNSIGNED|〇||-|-|〇|||
+|ソフトアビリティ|soft_ability|VARCHAR(16)||||〇||null||
+|ハードアビリティ|hard_ability|VARCHAR(16)||||〇||null||
+|キルパーティクル|kill_particle|VARCHAR(16)||||〇||lava||
+|出現パーティクル|emerge_particle|VARCHAR(16)||||〇||none||
+
+#### player_kill_particle_validation
+|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
+|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+|ID|id|INT UNSIGNED|〇||-|-|〇|||
+|パーティクル|particle|BOOL||||〇||FALSE||
 
 #### player_ability_validation
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
