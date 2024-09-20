@@ -114,11 +114,11 @@
 
 
 ## 初動アイテム
-- [ ] ハチミツ入り瓶
+- [x] ハチミツ入り瓶
   - [x] プロテクター（鎧）を一段階上位の物へ回復させる
-  - [ ] 初動で2つ
-- [ ] 鉄のプロテクター（鎧）
-  - [ ] 初動で2つ
+  - [x] 初動で2つ
+- [x] 鉄のプロテクター（鎧）
+  - [x] 初動で1つ
 
 ## ランク
 ※イロレーティングシステムで実装予定
@@ -132,23 +132,56 @@
 |FIVE|5000|-|
 
 ## データベース
+### マスタ
+#### game_rank
+|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
+|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|ランク名称|name|VARCHAR(8)|||〇|〇||||
+|最小レート|minimum|INTEGER UNSIGNED|||〇|||||
+|最大レート|maximum|INTEGER UNSIGNED||||||||
+
+#### season
+|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
+|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|シーズン名|name|VARCHAR(16)|||〇|〇||||
+
+#### ability
+|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
+|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|アビリティ名|name|VARCHAR(16)|||〇|〇||||
+
+#### kill_particle
+|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
+|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|キルパーティクル名|name|VARCHAR(16)|||〇|〇||||
+
+#### emerge_particle
+|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
+|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|出現パーティクル名|name|VARCHAR(16)|||〇|〇||||
+|シーズン|season_id|INTEGER UNSIGNED||season.id|〇|||||
+
+### トランザクション
 #### player_account
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-|ID|id|INT UNSIGNED|〇||-|-|〇|||
-|UUID|uuid|CHAR(32)|||〇|〇||||
-|Discord|discord|VARCHAR(32)||||||NULL||
-|お金|karma|INT UNSIGNED||||||0||
-|タグマーク|tag_prefix|VARCHAR(32)||||||NULL|[VIP]みたいな|
-|プレイ時間|play_times|DATETIME|||〇|||||
+|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|UUID|uuid|CHAR(36)|||〇|〇||||
+|お金|karma|INTEGER UNSIGNED||||||0||
+|プレイ時間|play_times|DOUBLE|||〇|||0.0||
 |最終プレイ日時|last_play_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
 |作成日|created_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
 
 #### player_battle_record
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-|ID|id|INT UNSIGNED|〇||-|-|〇|||
-|プレイヤーID|player_id|INTEGER UNSIGNED||player_account.id|〇|||||
+|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|プレイヤー|player_id|INTEGER UNSIGNED||player_account.id|〇|||||
 |シーズン|season_id|INTEGER UNSIGNED||season.id|〇|||||
 |ランク|rank_id|INTEGER UNSIGNED||game_rank.id|〇|||||
 |レート|rating|INTEGER UNSIGNED|||〇|||0||
@@ -164,31 +197,40 @@
 |プロテクター強化回数|enchanted_count|INTEGER UNSIGNED|||〇|||0||
 |最長射撃距離|longest_shot_distance|DOUBLE|||〇|||0.0||
 
-#### player_current_settings
+#### player_game_settings
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-|ID|id|INT UNSIGNED|〇||-|-|〇|||
-|ソフトアビリティ|soft_ability|VARCHAR(16)||||〇||null||
-|ハードアビリティ|hard_ability|VARCHAR(16)||||〇||null||
-|キルパーティクル|kill_particle|VARCHAR(16)||||〇||lava||
-|出現パーティクル|emerge_particle|VARCHAR(16)||||〇||none||
+|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|プレイヤー|player_id|INTEGER UNSIGNED||player_account.id|〇|〇||||
+|ソフトアビリティ|soft_ability_id|INTEGER UNSIGNED||ability.id||||NULL||
+|ハードアビリティ|hard_ability_id|INTEGER UNSIGNED||ability.id||||NULL||
+|キルパーティクル|kill_particle_id|INTEGER UNSIGNED||kill_particle.id||||NULL||
+|出現パーティクル|emerge_particle_id|INTEGER UNSIGNED||emerge_particle.id||||NULL||
 
-#### player_kill_particle_validation
+#### player_kill_particle
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-|ID|id|INT UNSIGNED|〇||-|-|〇|||
-|パーティクル|particle|BOOL||||〇||FALSE||
+|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|プレイヤー|player_id|INTEGER UNSIGNED||player_account.id|〇|||||
+|キルパーティクル|kill_particle_id|INTEGER UNSIGNED||kill_particle.id|〇|||||
+|獲得日|created_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
 
-#### player_ability_validation
+#### player_emerge_particle
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-|ID|id|INT UNSIGNED|〇||-|-|〇|||
-|アビリティ|ability_name|BOOL||||〇||FALSE||
+|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|プレイヤー|player_id|INTEGER UNSIGNED||player_account.id|〇|||||
+|出現パーティクル|emerge_particle_id|INTEGER UNSIGNED||emerge_particle.id|〇|||||
+|獲得日|created_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
 
-#### player_ability_pick
+#### player_ability
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-|ID|id|INT UNSIGNED|〇||-|-|〇|||
-|アビリティ|ability_name|INT UNSIGNED||||〇||0||
+|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|プレイヤー|player_id|INTEGER UNSIGNED||player_account.id|〇|||||
+|アビリティ|ability_id|INTEGER UNSIGNED||ability.id|〇|||||
+|ソフトアビリティとして使った回数|count_as_soft_ability|INTEGER UNSIGNED|||〇||0||
+|ハードアビリティとして使った回数|count_as_hard_ability|INTEGER UNSIGNED|||〇||0||
+|獲得日|created_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
 
 ...
