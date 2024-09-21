@@ -11,7 +11,7 @@
 十二宮の射手座に属するともいわれる。
 
 ## ゲームの進行
-#### カジュアル -Casual-（多人数戦）
+### カジュアル -Casual-（多人数戦）
 1. エントリールームへテレポート
 2. 全員が準備完了になり次第5秒カウント開始
 3. 透明化を付与
@@ -24,7 +24,7 @@
 10. 4分後に範囲を縮める 60から30へ
 11. 決着
 
-#### デュエル -Duel- (1v1 ランク)
+### デュエル -Duel- (1v1 ランク)
 1. エントリールームへテレポート
 2. 全員が準備完了になり次第5秒カウント開始
 3. 透明化を付与
@@ -37,7 +37,7 @@
 10. 2分後に範囲を縮める 60から30へ
 11. 決着
 
-#### ウォーズ -Wars- (チーム戦)
+### ウォーズ -Wars- (チーム戦)
 1. エントリールームへテレポート
 2. 全員が準備完了になり次第5秒カウント開始
 3. 透明化を付与
@@ -131,12 +131,11 @@
 |FOUR|4000|4999|
 |FIVE|5000|-|
 
-## データベース
-### マスタ
+## マスターデータベース
 #### game_rank
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|ID|id|TINYINT UNSIGNED|〇||||〇|||
 |ランク名称|name|VARCHAR(8)|||〇|〇||||
 |最小レート|minimum|INTEGER UNSIGNED|||〇|||||
 |最大レート|maximum|INTEGER UNSIGNED||||||||
@@ -144,29 +143,29 @@
 #### season
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|ID|id|TINYINT UNSIGNED|〇||||〇|||
 |シーズン名|name|VARCHAR(16)|||〇|〇||||
 
 #### ability
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|ID|id|TINYINT UNSIGNED|〇||||〇|||
 |アビリティ名|name|VARCHAR(16)|||〇|〇||||
 
 #### kill_particle
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|ID|id|TINYINT UNSIGNED|〇||||〇|||
 |キルパーティクル名|name|VARCHAR(16)|||〇|〇||||
 
 #### emerge_particle
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|ID|id|TINYINT UNSIGNED|〇||||〇|||
 |出現パーティクル名|name|VARCHAR(16)|||〇|〇||||
 |シーズン|season_id|INTEGER UNSIGNED||season.id|〇|||||
 
-### トランザクション
+## トランザクションデータベース
 #### player_account
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
@@ -207,22 +206,6 @@
 |キルパーティクル|kill_particle_id|INTEGER UNSIGNED||kill_particle.id||||NULL||
 |出現パーティクル|emerge_particle_id|INTEGER UNSIGNED||emerge_particle.id||||NULL||
 
-#### player_kill_particle
-|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
-|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-|ID|id|INTEGER UNSIGNED|〇||||〇|||
-|プレイヤー|player_id|INTEGER UNSIGNED||player_account.id|〇|||||
-|キルパーティクル|kill_particle_id|INTEGER UNSIGNED||kill_particle.id|〇|||||
-|獲得日|created_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
-
-#### player_emerge_particle
-|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
-|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-|ID|id|INTEGER UNSIGNED|〇||||〇|||
-|プレイヤー|player_id|INTEGER UNSIGNED||player_account.id|〇|||||
-|出現パーティクル|emerge_particle_id|INTEGER UNSIGNED||emerge_particle.id|〇|||||
-|獲得日|created_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
-
 #### player_ability
 |論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
@@ -231,6 +214,20 @@
 |アビリティ|ability_id|INTEGER UNSIGNED||ability.id|〇|||||
 |ソフトアビリティとして使った回数|count_as_soft_ability|INTEGER UNSIGNED|||〇||0||
 |ハードアビリティとして使った回数|count_as_hard_ability|INTEGER UNSIGNED|||〇||0||
-|獲得日|created_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
+|獲得日|opened_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
 
-...
+#### player_kill_particle
+|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
+|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|プレイヤー|player_id|INTEGER UNSIGNED||player_account.id|〇|||||
+|キルパーティクル|kill_particle_id|INTEGER UNSIGNED||kill_particle.id|〇|||||
+|獲得日|opened_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
+
+#### player_emerge_particle
+|論理カラム名|物理カラム名|型|PK|FK|NN|UK|AI|DEF|備考|
+|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+|ID|id|INTEGER UNSIGNED|〇||||〇|||
+|プレイヤー|player_id|INTEGER UNSIGNED||player_account.id|〇|||||
+|出現パーティクル|emerge_particle_id|INTEGER UNSIGNED||emerge_particle.id|〇|||||
+|獲得日|opened_at|DATETIME|||〇|||CURRENT_TIMESTAMP||
