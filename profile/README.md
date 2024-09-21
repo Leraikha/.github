@@ -163,7 +163,7 @@
 |---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
 |ID|id|TINYINT UNSIGNED|〇||||〇|||
 |出現パーティクル名|name|VARCHAR(16)|||〇|〇||||
-|シーズン|season_id|INTEGER UNSIGNED||season.id|〇|||||
+|シーズン|season_id|TINYINT UNSIGNED||season.id|〇|||||
 
 ## トランザクションデータベース
 #### player_account
