@@ -183,7 +183,7 @@
 |プレイヤー|player_id|INTEGER UNSIGNED||player_account.id|〇|||||
 |シーズン|season_id|INTEGER UNSIGNED||season.id|〇|||||
 |ランク|rank_id|INTEGER UNSIGNED||game_rank.id|〇|||||
-|レート|rating|INTEGER UNSIGNED|||〇|||0||
+|レート|rating|DOUBLE|||〇|||0.0||
 |プレイ数|play_count|INTEGER UNSIGNED|||〇|||0||
 |勝利数|win_count|INTEGER UNSIGNED|||〇|||0||
 |キル数|kill_count|INTEGER UNSIGNED|||〇|||0||
